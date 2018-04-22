@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Communicating Module Test Page</title>
+<script type="text/javascript">
+
+// Websocket连接
+var socket = new WebSocket("wss://meeting.maphical.cn/Meeting-Interactive-System/endpoint");
+socket.onopen = function (evt) {
+	writeToScreen("Connected.");
+}
+socket.onmessage = function (evt) {
+	writeToScreen("Received:<br/>" + evt.data);
+}
+socket.onerror = function (evt) {
+	writeToScreen('<span style="color: red;"> ERROR:</span> ' + evt.data); 
+	socket.close();
+}
+
+//输出消息的函数
+function writeToScreen(message) {
+	var output = document.getElementById("output");
+	var pre = document.createElement("p");
+	pre.style.wordWrap = "break-word";
+	pre.innerHTML = message;
+	output.appendChild(pre);
+}
+
+// 发送消息的函数
+function doSend() {
+	var message = document.getElementById("message").value;
+	socket.send(message);
+	writeToScreen("Send: " + message);
+}
+
+// 编码Base64的函数
+function doEncode() {
+	var row = document.getElementById("base64").value;
+	var encode = window.btoa(escape(row));
+	document.getElementById("result").value = encode;
+}
+
+// 解码Base64的函数
+function doDecode() {
+	var row = document.getElementById("base64r").value;
+	var decode = unescape(window.atob(row));
+	document.getElementById("resultr").value = decode;
+}
+
+</script>
+</head>
+<body>
+
+<h1>Communicating Module Test Page</h1>
+
+<form action="">
+	<input id="message" name="message" value="" type="text"/>
+	<input onclick="doSend()" value="Send" type="button"/>
+</form>
+<form action="">
+	<input id="base64" name="base64" value="" type=text/>
+	<input onclick="doEncode()" value="Encode" type="button"/>
+	<input id="result" name="result" value="Base64 Content" type="text"/>
+</form>
+<form action="">
+	<input id="base64r" name="base64r" value="" type=text/>
+	<input onclick="doDecode()" value="Decode" type="button"/>
+	<input id="resultr" name="resultr" value="Ascii Content" type="text"/>
+</form>
+
+<div id="output">
+</div>
+
+</body>
+</html>

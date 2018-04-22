@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="Meeting-Interactive-System">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/SourceCode/BackEnd/CommunicateM/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/SourceCode/BackEnd/MeetingM/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/SourceCode/BackEnd/UserM/src"/>
+        <property name="context-root" value="Meeting-Interactive-System"/>
+        <property name="java-output-path" value="/Meeting-Interactive-System/SourceCode/BackEnd/MeetingM/build/classes"/>
+    </wb-module>
+</project-modules>
